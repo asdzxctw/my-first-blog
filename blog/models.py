@@ -17,3 +17,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Answer(models.Model):
+    name = models.CharField(max_length=20)
+    sn = models.CharField(max_length=20)
+    mobile = models.CharField(max_length=20)
+    email = models.EmailField(max_length=100)
+    phone = models.CharField(max_length=20)
+    password = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name

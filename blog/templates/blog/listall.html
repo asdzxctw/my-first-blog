@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>所有填答內容</title>
+</head>
+<body>
+	<h2>所有資料</h2>
+	<table border="1" cellpadding="0" cellspacing="0">
+		<th>姓名</th><th>學號</th><th>手機</th><th>電郵</th><th>市內電話</th><th>密碼</th>
+		{% for answer in answers%}
+			<tr>
+				 <td>{{ answer.name }}</td>
+				 <td>{{ answer.sn }}</td>
+				 <td>{{ answer.mobile }}</td>
+				 <td>{{ answer.email }}</td>
+				 <td>{{ answer.phone }}</td>
+				 <td>{{ answer.password }}</td>
+			</tr>
+		{% endfor%}
+	</table>
+	<input type="button" value="下載csv" onclick="location.href='/allcsv/'">
+	<input type="button" value="回首頁" onclick="location.href='/'">
+
+</body>
+</html>

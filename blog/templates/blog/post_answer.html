@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>舔血問卷</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            var r1 = /^.{2,}$/
+            var r2 = /^[A-Z]|\d{8}$/
+            var r3 = /^09\d{2}-\d{6}$/
+            var r4 = /.+@.+\.+.+/g
+            var r5 = /0(2|3|4|5|6|7|8)\d{0,2}/
+            var r6 = /\d{6,8}/
+            var r8 = /.{5,20}/
+            var r8a = /[A-Z]+/
+            var r8b = /[a-z]+/
+            var r8c = /\d+/
+
+            $("#name").blur(function () {
+                if (r1.test($("#name").val())) {
+                    //正確                
+                    $("#m1").text("");
+                    $("#name").css("borderColor", "green");
+                } else {
+                    $("#m1").text("錯誤").css("color", "red");
+                    $("#name").css("borderColor", "red");
+                    //不正確
+                }
+            })
+
+            $("#sn").blur(function () {
+                if (r2.test($("#sn").val())) {
+                    //正確                
+                    $("#m2").text("");
+                    $("#sn").css("borderColor", "green");
+                } else {
+                    $("#m2").text("錯誤").css("color", "red");
+                    $("#sn").css("borderColor", "red");
+                    //不正確
+                }
+            })
+
+            $("#mobile").blur(function () {
+                if (r3.test($("#mobile").val())) {
+                    //正確                
+                    $("#m3").text("");
+                    $("#mobile").css("borderColor", "green");
+                } else {
+                    $("#m3").text("錯誤").css("color", "red");
+                    $("#mobile").css("borderColor", "red");
+                    //不正確
+                }
+            })
+
+            $("#email").blur(function () {
+                if (r4.test($("#email").val())) {
+                    //正確                
+                    $("#m4").text("");
+                    $("#email").css("borderColor", "green");
+                } else {
+                    $("#m4").text("錯誤").css("color", "red");
+                    $("#email").css("borderColor", "red");
+                    //不正確
+                }
+            })
+
+            if ($("#zone").val() != "") {
+                $("#zone").blur(function () {
+                    if (r5.test($("#zone").val())) {
+                        //正確                
+                        $("#m5").text("");
+                        $("#zone").css("borderColor", "green");
+                    } else {
+                        $("#m5").text("錯誤").css("color", "red");
+                        $("#zone").css("borderColor", "red");
+                        //不正確
+                    }
+                })
+            } else {
+                $("#m5").text("");
+                $("#zone").css("borderColor", "grey");
+            }
+
+            if ($("#phone").val() != "") {
+                $("#phone").blur(function () {
+                    if (r6.test($("#phone").val())) {
+                        //正確                
+                        $("#m6").text("");
+                        $("#phone").css("borderColor", "green");
+                    } else {
+                        $("#m6").text("錯誤").css("color", "red");
+                        $("#phone").css("borderColor", "red");
+                        //不正確
+                    }
+                })
+
+            } else {
+                $("#m6").text("");
+                $("#phone").css("borderColor", "grey");
+            }
+
+
+            //8.密碼強度
+
+            $("#password").blur(function () {
+                if (r8.test($("#password").val())) {
+                    //正確                
+                    var score = 0;
+                    $("#password").css("borderColor", "green");
+
+                    if (r8a.test($("#password").val())) {
+                        score++
+                    }
+                    if (r8b.test($("#password").val())) {
+                        score++
+                    }
+                    if (r8c.test($("#password").val())) {
+                        score++
+                    }
+                    if (score == 1) {
+                        $("#m8").text("弱").css("color", "green");
+                    }
+
+                    if (score == 2) {
+                        $("#m8").text("中").css("color", "green");
+                    }
+
+                    if (score == 3) {
+                        $("#m8").text("強").css("color", "green");
+                    }
+
+
+                } else {
+                    $("#m8").text("錯誤").css("color", "red");
+                    $("#password").css("borderColor", "red");
+                    //不正確
+                }
+            })
+
+
+
+        })
+    </script>
+    <style>
+        #form {
+            width: 500px;
+            box-shadow: 0px 0px 5px black;
+            padding: 5px;
+            font-family: 微軟正黑體;
+            line-height: 26px;
+            margin: auto;
+        }
+        
+        #form h1 {
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+	<div id="form">
+		<form action="." method="POST" >
+			{% csrf_token %}
+	        <!-- action送給PHP   -->
+
+	        <h1>台灣大學 JQuery 申請表</h1>
+	        <h1>{{message}}</h1>
+	        <p>
+	            <label for="name">姓名</label>
+	            <input id="name" name="name" placeholder="請輸入你的姓名" type="text" size="30"> （請填寫兩個字以上）<span id="m1"></span>
+	            <!--                使用正規表示法（產生器）-->
+	        </p>
+	        <p>
+	            <label for="sn">學號</label>
+	            <input id="sn" name="sn" placeholder="請輸入你的學號" type="text" size="15">（大寫英文加數字）<span id="m2"></span>
+	            <!-- name=開啟後端的橋樑  送給後端程式 id是給前端用的 /-->
+	        </p>
+	        <p>
+	            <label for="mobile">手機</label>
+	            <input id="mobile" name="mobile" placeholder="請輸入你的手機號碼" type="text" size="15">（09XX-XXXXXX）<span id="m3"></span>
+	        </p>
+
+	        <p>
+	            <label for="email">電郵</label>
+	            <input id="email" name="email" placeholder="請輸入你的電郵" type="text" size="30">（XXXX@XXXX.XXX）<span id="m4"></span>
+	        </p>
+
+	        <p>
+	            <label for="phone">市內電話</label>
+	            <input id="phone" name="phone" placeholder="電話號碼" type="text" size="25"><span id="m6">
+	        </p>
+
+
+	        <p>
+	            <label for="password">密碼</label>
+	            <input id="password" name="password" placeholder="密碼" type="text" size="20">（5-20字內）<span id="m8"></span>
+	        </p>
+
+
+	        <p>
+	            <!--                <input type="submit" value="送出資料">-->
+	            <input type="submit" id="submitBtn" value="送出資料">
+	            <input type="button" value="回首頁" onclick="location.href='/'">
+	        </p>
+
+	    </form>
+	</div>
+</body>
+</html>
