@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.utils import timezone
-from .models import Post,Answer
-from .form import PostForm
+from .models import Post,Answer,cal4_ans
+from .form import PostForm,cal4_ansForm
 from djqscsv import render_to_csv_response
 
 def index(request):
@@ -53,5 +53,45 @@ def allcsv(request):
 
 	return render_to_csv_response(answers)
 
+def estate_cal4(request):
+	print(request.POST)
+	if request.method == 'POST':
+		cal4_ans_Form = cal4_ansForm(request.POST)
+		if cal4_ans_Form.is_valid():
+			print(cal4_ans_Form.cleaned_data)
+			total = cal4_ans_Form.cleaned_data['total']
+			beforeMarry = cal4_ans_Form.cleaned_data['beforeMarry']
+			partnerDA = cal4_ans_Form.cleaned_data['partnerDA']
+			partnerName = cal4_ans_Form.cleaned_data['partnerName']
+			childName = cal4_ans_Form.cleaned_data['childName']
+			parentName = cal4_ans_Form.cleaned_data['parentName']
+			broName = cal4_ans_Form.cleaned_data['broName']
+			gPaName = cal4_ans_Form.cleaned_data['gPaName']
+			estate = cal4_ans_Form.cleaned_data['estate']
+			successName = cal4_ans_Form.cleaned_data['successName']
+			spendEnd = cal4_ans_Form.cleaned_data['spendEnd']
+			successName2 = cal4_ans_Form.cleaned_data['successName2']
+			spendEnd2 = cal4_ans_Form.cleaned_data['spendEnd2']
+			childNum = cal4_ans_Form.cleaned_data['childNum']
+			parentNum = cal4_ans_Form.cleaned_data['parentNum']
+			broNum = cal4_ans_Form.cleaned_data['broNum']
+			gPaNum = cal4_ans_Form.cleaned_data['gPaNum']
 
+			unit = cal4_ans.objects.create(total = total, beforeMarry = beforeMarry, \
+				partnerDA = partnerDA, partnerName = partnerName, childName = childName, \
+				parentName = parentName, broName = broName, gPaName = gPaName, \
+				estate = estate, successName = successName, spendEnd = spendEnd, \
+				successName2 = successName2, spendEnd2 = spendEnd2, childNum = childNum ,\
+				parentNum =parentNum ,broNum=broNum,gPaNum=gPaNum)
+
+
+			unit.save()
+			message = '提交成功！'
+			return redirect('/estate_cal4/')
+		else:
+			message = '未通過驗證'
+	else:
+		message = '請填入資料'
+		postform = PostForm()
+	return render(request,"blog/estate_cal4.html",{'message':message})
 

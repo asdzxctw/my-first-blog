@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^listall/$', views.listall),
     url(r'^post_answer/$', views.post_answer),
     url(r'^allcsv/$', views.allcsv),
+    url(r'^estate_cal4/$', views.estate_cal4),
 ]

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable:no">
+    <title>estate calculator</title>
+    <title>台大法律學院 黃詩淳副教授研究室</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="jquery-1.12.1.min.js"></script>
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+    <script type="text/javascript">
+        function calcu(){
+        var total = document.getElementById('total').value
+        var beforeMarry =document.getElementById('beforeMarry').value
+        var partnerDA =document.getElementById('partnerDA').value
+        var childNum =document.getElementById('childNum').value
+        var parentNum =document.getElementById('parentNum').value
+        var broNum =document.getElementById('broNum').value
+        var gPaNum =document.getElementById('gPaNum').value
+        var estateTemp = parseInt(total, 10)-parseInt(beforeMarry,10)
+        var spendEnd=document.getElementById('spendEnd').value
+        var spendTemp=estateTemp
+        var spendTemp2=estateTemp
+        var partnerName=document.getElementById('partnerName').value
+        var childName=document.getElementById('childName').value
+        var parentName=document.getElementById('parentName').value
+        var broName=document.getElementById('broName').value
+        var gPaName=document.getElementById('gPaName').value
+        var successName2=null
+        var successName3=null
+        var spendEnd2=null
+        var spendEnd3=null
+        
+        if(estateTemp <0){
+                document.getElementById('estate').value="建議拋棄繼承"
+                document.getElementById('spendEnd').value="建議拋棄繼承"
+                    }else{
+                document.getElementById('estate').value=estateTemp
+                    if(partnerDA=='0'){
+                document.getElementById('successName').value="配偶已不在"
+                document.getElementById('spendEnd').value="無繼承額度"  
+                        if(childNum=="0"){
+                            if(parentNum=="0"){
+                                if(broNum=="0"){
+                                    if(gPaNum=="0"){
+                    document.getElementById('spendEnd2').value="沒有繼承人，歸國庫。"   
+                                    }else{
+                        document.getElementById('spendEnd2').value=(spendTemp/gPaNum)
+                        document.getElementById('successName2').value=gPaName
+                                    }
+                                   }else{
+                        document.getElementById('spendEnd2').value=(spendTemp/broNum)
+                        document.getElementById('successName2').value=broName
+                            }
+                        }else{
+                    document.getElementById('spendEnd2').value=(spendTemp/parentNum)
+                    document.getElementById('successName2').value=parentName
+                        }                                
+                        }else{
+                    document.getElementById('spendEnd2').value=(spendTemp / childNum)
+                    document.getElementById('successName2').value=childName
+                        }
+                        }else{
+                document.getElementById('successName').value=partnerName
+                var spendTemp=estateTemp
+                var spendTemp2=estateTemp
+                        if(childNum=="0"){
+                            if(parentNum=="0"){
+                                if(broNum=="0"){
+                                    if(gPaNum=="0"){
+                    document.getElementById('spendEnd').value=spendTemp
+                                    }else{
+                        var spendTemp = (parseInt(spendTemp, 10)*2)/3
+                        document.getElementById('spendEnd').value=spendTemp
+                        var spendTemp2 = (parseInt(spendTemp2, 10)/3)/parseInt(gPaNum,10)
+                        document.getElementById('spendEnd2').value=spendTemp2
+                        document.getElementById('successName2').value=gPaName
+                                    }
+                                   }else{
+                       var spendTemp = parseInt(spendTemp, 10)/2
+                        document.getElementById('spendEnd').value=spendTemp
+                        var spendTemp2 = (parseInt(spendTemp2, 10)/2)/parseInt(broNum,10)
+                        document.getElementById('spendEnd2').value=spendTemp2
+                        document.getElementById('successName2').value=broName
+                            }
+                        }else{
+                      var spendTemp = parseInt(spendTemp, 10)/2
+                        document.getElementById('spendEnd').value=spendTemp
+                        var spendTemp2 = (parseInt(spendTemp2, 10)/2)/parseInt(parentNum,10)
+                        document.getElementById('spendEnd2').value=spendTemp2
+                        document.getElementById('successName2').value=parentName
+                        }                                
+                        }else{
+                            var spendTemp = parseInt(spendTemp, 10)/(parseInt(childNum,10)+1)
+                        document.getElementById('spendEnd').value=spendTemp
+                        var spendTemp2 = parseInt(spendTemp2, 10)/(parseInt(childNum,10)+1)
+                        document.getElementById('spendEnd2').value=spendTemp2
+                        document.getElementById('successName2').value=childName
+                        }
+                        }       
+            }
+        }
+</script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+            list-style-type: none;
+            font-family: 微軟正黑體;
+            font-size: 14px;
+        }
+        
+        .wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            width: 802px;
+            border: 1px solid black;
+        }
+        
+        header{
+            /*            height: 200px;*/
+            background-color: lightblue;
+            text-align: center;
+            /*            padding-top: 95px;*/
+            width: 800px;
+        }
+        
+         noter {
+            background-color: green;
+            text-align: center;
+            width: 800px;
+        }
+        
+        header img {
+            width: 400px;
+            height: auto
+        }
+        
+        nav {
+            /*            border: 1px solid black;*/
+        }
+        
+        nav ul li {
+            float: left;
+            background-color: red;
+            width: 100px;
+            height: 40px;
+            text-align: center;
+            padding-top: 4px;
+        }
+        
+        nav ul li a {
+            color: #0045ff;
+            text-decoration: none;
+            font-size: 20px;
+            display: block;
+            width: 100px;
+            /*            height: 40px;*/
+            /*            padding-top: 8px;*/
+            transition: all 1s;
+        }
+        
+        nav ul li a:hover {
+            background-color: green;
+            font-size: 30px;
+            color: darkgoldenrod;
+        }
+        
+        aside {
+            width: 150px;
+            float: left;
+            border: 5px solid black;
+        }
+        
+        article {
+            width: 450px;
+            float: left;
+            border: 5px solid black;
+            margin: 0px 25px 0px 25px;
+            line-height: 26px;
+        }
+        
+        article p {
+            margin: 20px;
+        }
+        
+        footer {
+            width: 800px;
+            clear: left;
+            height: 130px;
+            text-align: center;
+            border: 5px solid black;
+            padding: 10px 0px;
+            border-top color: red;
+            font-size: 13px;
+            font-family: 標楷體;
+            line-height: 26px;
+            background-color: chocolate;
+        }
+        
+        @media print (max-width: @screen-xs) {
+            body{font-size: 10px;}
+            .wrapper {
+                width: 100%;
+                border: none;
+            }
+            header {
+                width: 100%
+            }
+            nav {
+                display: none
+            }
+            aside {
+                display: none
+            }
+            article {
+                width: 90%;
+                font-size: 13px;
+                font-family: 標楷體;
+                line-height: 26px;
+            }
+            footer {
+                width: 100%;
+                border: none;
+            }
+            noter {
+                width: 100%;
+                border: none;
+            }
+        }
+        
+     @media print (max-width: @screen-sm) {
+            body{font-size: 14px;}
+            .wrapper {
+                width: 100%;
+                border: none;
+            }
+            header {
+                width: 100%
+            }
+            nav {
+                display: none
+            }
+            aside {
+                display: none
+            }
+            article {
+                width: 90%;
+                font-size: 13px;
+                font-family: 標楷體;
+                line-height: 26px;
+            }
+            footer {
+                width: 100%;
+                border: none;
+            }
+            noter {
+                width: 100%;
+                border: none;
+            }
+        }
+       
+        
+        @media screen {
+            .wrapper {
+                width: 100%;
+                border: none;
+                margin: auto;
+            }
+            header {
+                width: 100%;
+            }
+            
+            header img {
+            width: 100%;
+            height: auto
+        }
+            
+            nav {}
+            nav ul {}
+            nav ul li {width: 25%;}
+            nav ul li a {width: 100%;}
+            aside {
+                float: none;
+                width: 100%;
+                margin: 0px;
+            }
+            article {
+                float: none;
+                width: 100%;
+                margin: 0px;
+                font-size: 8px;
+                font-family: 標楷體;
+                line-height: 16px;
+            }
+            footer {
+                font-size: 8px;
+                width: 100%;
+                border: none;
+                padding: 0px;
+                line-height: normal;
+            }
+            noter {
+                width: 100%;
+                border: none;
+            }
+        }
+    </style>
+
+
+</head>
+
+
+
+<body>
+<div class="wrapper">
+<div >
+<h1 class="text-center">應繼分遺產試算器{{ message }}</h1><h1 class="text-center">Estate Calculator (Taiwan Situation)</h1>
+<div class="pull-left";width="100px"><img src="./images/qrcodeHuang.png"></div>
+<header><h3 class="text-right"> 台灣大學法律學院 黃詩淳</h3>
+
+<h3 class="text-right"> SJD.Asso. Prof. Siehchuen Huang, College of Law, NTU</h3></header>
+<h5 class="text-right">更多訊息，請email <a href="mailto:schhuang@ntu.edu.tw">schhuang@ntu.edu.tw</a></h5>
+    <header><h4>使用說明：1.操作人輸入「財產格」（數值）、「生存狀態」（選單）、「姓名」（文字）2.於頁面下端中會跳出運算（遺產分配數額）結果。3. 遺產定義為夫妻婚後剩餘財產，意即。4.如有特殊情形（如有遺囑指定分配或親屬數量超過本表）等情形，需另外處理。</h4></header>
+</div>
+
+<form action="." method="POST" >
+{% csrf_token %}
+
+<table style="width:100%" class="table">
+   <tr>
+    <th>輸入項目</th>
+    <th>說明（請輸入姓名）</th> 
+    <th>金額（請輸入數字）</th>
+  </tr>
+  
+  <tr>
+    <td>遺產</td>
+    <td></td> 
+    <td>
+<input type="text" name="total" id="total" onchange="calcu()" placeholder="請輸入金額">
+</td>
+    </tr>
+  
+  <tr>
+    <td>負債</td>
+    <td>如婚後房貸等
+    <options id=""></options>
+    </td> 
+    <td id="">
+<input type="text" name="beforeMarry" id="beforeMarry" onchange="calcu()" onkeydown="if (event.keyCode == 13) calcu()" placeholder="若無請輸入'0'">
+</td>
+  </tr>  
+   <tr>
+<td>可分額度</td>
+    <td>__________</td> 
+    <td id="">
+<input type="text" name="estate" id="estate" disabled="disabled">
+</td>
+  </tr>
+
+  <tr>
+    <td>配偶欄</td>
+<td>
+<input type="text" name="partnerName" id="partnerName" onchange="calcu()" placeholder="請輸入姓名">
+</td>
+    <td id=""><select id="partnerDA" name="partnerDA" onchange="calcu()">
+  <option value="1">活著</option>
+  <option value="0">已死亡/沒有結婚</option>
+</select>
+ 
+ </td>
+  </tr>
+
+  
+    <tr>
+    <td>子女欄</td>
+<td>
+<input type="text" name="childName" id="childName" onchange="calcu()" onkeydown="if (event.keyCode == 13) calcu()" placeholder="尚活著之子女姓名">
+</td>
+    <td id=""><select id="childNum" name="childNum" onchange="calcu()">
+  <option value=0>沒有子女/現皆不在人世</option>
+  <option value=1>現有一位子女活著</option>
+  <option value=2>現有二位子女活著</option>
+  <option value=3>現有三位子女活著</option>
+</select></td>
+  </tr>
+
+
+    <tr>
+    <td>父母欄</td>
+<td>
+<input type="text" name="parentName" id="parentName" onchange="calcu()" onkeydown="if (event.keyCode == 13) calcu()" placeholder="尚活著之父母姓名">
+</td>
+    <td id=""><select id="parentNum" name="parentNum" onchange="calcu()">
+  <option value=2>父母健在</option>
+  <option value=1>僅一方健在</option>
+  <option value=0>父母雙亡</option>
+</select></td>
+  </tr>
+
+    <tr>
+    <td>親兄弟姊妹</td>
+<td>
+<input type="text" name="broName" id="broName" onchange="calcu()" onkeydown="if (event.keyCode == 13) calcu()" placeholder="尚活著之兄弟姊妹姓名">
+</td>
+    <td id=""><select id="broNum" name="broNum" onchange="calcu()">
+  <option value=0>沒有兄弟姊妹/現皆不在人世</option>
+  <option value=1>現有一位兄弟姊妹活著</option>
+  <option value=2>現有二位兄弟姊妹活著</option>
+  <option value=3>現有三位兄弟姊妹活著</option>
+</select></td>
+  </tr>
+  
+      <tr>
+    <td>祖父母</td>
+<td>
+<input type="text" name="gPaName" id="gPaName" onchange="calcu()" onkeydown="if (event.keyCode == 13) calcu()" placeholder="尚活著之祖父母姓名">
+</td>
+    <td id=""><select id="gPaNum" name="gPaNum" onchange="calcu()">
+   <option value='4'>祖父母皆健在</option>
+  <option value='3'>有三位健在</option>
+      <option value='2'>有兩位健在</option>
+  <option value='1'>僅一位健在</option>
+    <option value='0'>祖父母皆亡</option>
+</select></td>
+  </tr>
+  
+      <tr>
+    <td>-----------</td>
+    <td>----計算結果----</td>
+    <td>-----------</td>
+  </tr>
+
+<!--
+ <tr>
+    <td>配偶之婚後財產</td>
+    <td>
+<input type="text" name="欄位名稱" id="successName3" onchange="calcu()" onkeydown="if (event.keyCode == 13) calcu()" disabled="disabled">
+</td>
+    <td id="">
+婚後財產分配額<input type="text" name="欄位名稱" id="spendEnd3" disabled="disabled" placeholder=婚姻存續時之貢獻>
+</td>
+  </tr>
+-->
+
+  <tr>
+    <td>配偶</td>
+    <td>
+<input type="text" name="successName" id="successName" onchange="calcu()" onkeydown="if (event.keyCode == 13) calcu()" disabled="disabled">
+</td>
+    <td id="">
+配偶應繼分金額<input type="text" name="spendEnd" id="spendEnd" disabled="disabled" placeholder=請調整親屬數量>
+</td>
+  </tr>
+  
+  <tr>
+    <td>其他親屬</td>
+    <td>
+<input type="text" name="successName2" id="successName2" onchange="calcu()" onkeydown="if (event.keyCode == 13) calcu()" disabled="disabled">
+</td>
+    <td id="">
+每人應繼分金額<input type="text" name="spendEnd2" id="spendEnd2" disabled="disabled" placeholder=請調整親屬數量>
+</td>
+  </tr>
+</table>
+
+
+
+
+    
+<div p class="text-center">
+<input type="submit" id="submitBtn" value="送出資料">
+<input type="button" value="回首頁" onclick="location.href='/'">
+<button onclick="myFunction()">可列印本頁 Print</button></div>
+</form>
+<div p class="text-center"><img src="./images/344772.jpg" width=300px></div>
+<script>
+function myFunction() {
+    window.print();
+}
+</script>
+</div>
+</body>
+</html>
