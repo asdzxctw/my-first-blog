@@ -328,7 +328,7 @@
     <header><h4>使用說明：1.操作人輸入「財產格」（數值）、「生存狀態」（選單）、「姓名」（文字）2.於頁面下端中會跳出運算（遺產分配數額）結果。3. 遺產定義為夫妻婚後剩餘財產，意即。4.如有特殊情形（如有遺囑指定分配或親屬數量超過本表）等情形，需另外處理。</h4></header>
 </div>
 
-<form action="." method="POST" >
+<form action="http://127.0.0.1:8000/calculate/" method="POST" >
 {% csrf_token %}
 
 <table style="width:100%" class="table">
